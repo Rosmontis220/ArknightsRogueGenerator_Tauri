@@ -1,0 +1,393 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Theme tokens
+
+   Five schemes, selected by `data-theme` on <html>. `app.html` sets that
+   attribute before the first paint from a localStorage mirror, so a cold start
+   on a dark scheme never flashes the light one.
+
+   `color-scheme` is set from JS rather than here, because it also decides how
+   the native webview draws scrollbars and the window frame.
+
+   The five are not a light/dark pair plus variants: 罗德岛 and 界园 are light,
+   终末地 / P5R / P3R are dark. `appearance.ts` is the source of truth for which
+   is which, and `app.html` repeats it because it runs before any module loads.
+--------------------------------------------------------------------------- */
+
+/* Colour values are fixed per scheme below. `--c-primary-text` exists because a
+   primary that works as a fill does not always work as text: 罗德岛's #007aff and
+   P3R's #1536b7 are both too low-contrast against their own surfaces, so the
+   readable variant is a separate token rather than a compromise on the fill.
+   界园's is the same problem inverted — see that block for the measurements. */
+
+[data-theme='rhodes'] {
+	--c-bg: #eaebed;
+	--c-surface: #ffffff;
+	--c-surface-2: #f2f3f5;
+	--c-border: #d5d7dc;
+	--c-text: #16181d;
+	--c-text-dim: #5b6472;
+	--c-primary: #007aff;
+	--c-primary-text: #0057c2;
+	--c-on-primary: #ffffff;
+	--c-primary-soft: #dbe9ff;
+	--c-danger: #c2410c;
+	--c-danger-soft: #fdece4;
+}
+
+[data-theme='endfield'] {
+	--c-bg: #0a0a0a;
+	--c-surface: #1a1a1a;
+	--c-surface-2: #232323;
+	--c-border: #333333;
+	--c-text: #f2f3f5;
+	--c-text-dim: #9aa0ab;
+	--c-primary: #fffa00;
+	--c-primary-text: #fffa00;
+	--c-on-primary: #0a0a0a;
+	--c-primary-soft: #2e2b00;
+	--c-danger: #ff7a5c;
+	--c-danger-soft: #33201b;
+}
+
+[data-theme='p5'] {
+	--c-bg: #0a0a0a;
+	--c-surface: #16151a;
+	--c-surface-2: #1f1e24;
+	--c-border: #2f2e35;
+	--c-text: #f5f5f5;
+	--c-text-dim: #9b9b9f;
+	--c-primary: #e60012;
+	--c-primary-text: #ff4d5c;
+	--c-on-primary: #ffffff;
+	--c-primary-soft: #33070b;
+	--c-danger: #ff4d4d;
+	--c-danger-soft: #331012;
+}
+
+[data-theme='p3r'] {
+	--c-bg: #070d2b;
+	--c-surface: #0d1638;
+	--c-surface-2: #142046;
+	--c-border: #22315e;
+	--c-text: #e8f4ff;
+	--c-text-dim: #8fb0cc;
+	--c-primary: #1536b7;
+	--c-primary-text: #86edfc;
+	--c-on-primary: #ffffff;
+	--c-primary-soft: #12224f;
+	--c-danger: #ff6b81;
+	--c-danger-soft: #2c1420;
+}
+
+/* 界园. The one light scheme besides 罗德岛, and the only one whose background is a
+   saturated colour rather than a near-neutral: #fc7cb2 is the identity, so it stays as
+   the page. Everything that has to be read on top of it is therefore black.
+
+   The first attempt at this scheme put #f6faff (near-white) on that pink as the text
+   colour, which measures 2.31:1 — below every contrast floor there is, and effectively
+   invisible. Black on the same pink is 7.18:1. The near-white did not go to waste: it is
+   the surface colour, where black on it is 16.61:1. `--c-on-primary` is black for the
+   same reason — #65b1a3 takes black text at 6.94:1 and white at only 2.51:1. */
+[data-theme='jieyuan'] {
+	--c-bg: #fc7cb2;
+	--c-surface: #f6faff;
+	--c-surface-2: #fdeef5;
+	--c-border: #e0568f;
+	--c-text: #1a1a1a;
+	--c-text-dim: #4a1f38;
+	--c-primary: #65b1a3;
+	--c-primary-text: #1f5048;
+	--c-on-primary: #1a1a1a;
+	--c-primary-soft: #d7ece8;
+	--c-danger: #6d0e2a;
+	--c-danger-soft: #ffe0ea;
+}
+
+/* 萨米. A mid-grey page rather than a near-black one, which is what makes this scheme
+   awkward to get right: the accent #55eced is a bright cyan, so it clears 4.88:1 on the
+   given background #57595d but loses ground fast on anything lighter. Every surface here
+   is therefore only a shade or two above the page — #5a5c60 and #5c5e62, where the accent
+   still measures 4.66 and 4.52 — and cards are told apart by their outline instead of by a
+   fill that would have cost the accent its contrast.
+
+   White is the body colour (7.02:1 on the page, 6.50 on a card) and #55eced is the
+   emphasis and secondary colour, as asked. The one place that does not reach AA is
+   `--c-on-primary`: white on the given button teal #2b8293 is 4.45:1, a hair under 4.5.
+   The alternative is worse — #55eced on that button is 3.10:1 — so white stays.
+
+   `--c-danger` is a pale pink rather than a red for the same reason jieyuan's text is
+   black: a mid-grey page cannot carry a saturated red as small text. #ffc0c0 is 4.53:1 on
+   the page and 7.62:1 on its own soft fill, so an error stays readable. */
+[data-theme='sami'] {
+	--c-bg: #57595d;
+	--c-surface: #5a5c60;
+	--c-surface-2: #5c5e62;
+	--c-border: #8b8e96;
+	--c-text: #ffffff;
+	--c-text-dim: #55eced;
+	--c-primary: #2b8293;
+	--c-primary-text: #55eced;
+	--c-on-primary: #ffffff;
+	--c-primary-soft: #1f454d;
+	--c-danger: #ffc0c0;
+	--c-danger-soft: #4e2f33;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+
+/* Layout tokens. `--shell-content-max` is shared by `.route-body` and the section
+   tab row so the two stay aligned; a long generated result stretching to 2000px of
+   single-line text on a wide monitor is the thing it prevents. */
+:root {
+	--shell-content-max: 72rem;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	background: var(--c-bg);
+	color: var(--c-text);
+	font-family:
+		'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, 'Segoe UI',
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Honour the setting from the settings screen as well as the OS preference. */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+[data-reduce-motion='always'] *,
+[data-reduce-motion='always'] *::before,
+[data-reduce-motion='always'] *::after {
+	animation: none !important;
+	transition: none !important;
+}
+
+/* ---------------------------------------------------------------------------
+   Components
+
+   Tailwind handles layout; these carry the theme, which Tailwind utilities
+   cannot do from runtime CSS variables without a lot of repetition.
+--------------------------------------------------------------------------- */
+
+.card {
+	background: var(--c-surface);
+	border: 1px solid var(--c-border);
+	border-radius: 16px;
+}
+
+.surface-2 {
+	background: var(--c-surface-2);
+}
+
+.dim {
+	color: var(--c-text-dim);
+}
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.4rem;
+	padding: 0.6rem 1rem;
+	border-radius: 12px;
+	border: 1px solid var(--c-border);
+	background: var(--c-surface);
+	color: var(--c-text);
+	font-size: 0.95rem;
+	cursor: pointer;
+	transition: background 120ms ease;
+}
+
+.btn:hover:not(:disabled) {
+	background: var(--c-surface-2);
+}
+
+.btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.btn-primary {
+	background: var(--c-primary);
+	border-color: var(--c-primary);
+	color: var(--c-on-primary);
+	font-weight: 600;
+}
+
+.btn-primary:hover:not(:disabled) {
+	filter: brightness(1.08);
+	background: var(--c-primary);
+}
+
+.btn-danger {
+	background: var(--c-danger-soft);
+	border-color: var(--c-danger);
+	color: var(--c-danger);
+}
+
+.tab {
+	padding: 0.5rem 1rem;
+	border-radius: 999px;
+	color: var(--c-text-dim);
+	text-decoration: none;
+	font-size: 0.95rem;
+}
+
+.tab:hover {
+	color: var(--c-text);
+}
+
+.tab[aria-current='page'] {
+	background: var(--c-primary-soft);
+	color: var(--c-primary-text);
+	font-weight: 600;
+}
+
+.field {
+	background: var(--c-surface);
+	border: 1px solid var(--c-border);
+	border-radius: 10px;
+	padding: 0.55rem 0.75rem;
+	color: var(--c-text);
+	width: 100%;
+}
+
+.field:focus {
+	outline: 2px solid var(--c-primary);
+	outline-offset: 1px;
+}
+
+.chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	padding: 0.3rem 0.7rem;
+	border-radius: 999px;
+	border: 1px solid var(--c-border);
+	background: var(--c-surface);
+	font-size: 0.85rem;
+	cursor: pointer;
+	user-select: none;
+}
+
+.chip[data-checked='true'] {
+	background: var(--c-primary-soft);
+	border-color: var(--c-primary);
+	color: var(--c-primary-text);
+}
+
+.chip[data-checked='false'] {
+	color: var(--c-text-dim);
+}
+
+.copyable {
+	cursor: pointer;
+	text-decoration: underline dotted;
+	text-underline-offset: 3px;
+}
+
+/* The scrolling body of one route, below its section tab row. Applied by each
+   route's own `+layout.svelte`, including the ones with no sub-pages — that keeps
+   the padding in one place instead of every page repeating it. */
+.route-body {
+	width: 100%;
+	max-width: var(--shell-content-max);
+	margin-inline: auto;
+	padding: 1rem 1.25rem 2.5rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Safe areas
+
+   Android 15 and later lay every app out edge to edge, so the webview draws
+   underneath the status bar. On a phone that puts the top of each screen — the
+   section tabs and the first buttons — behind the clock and out of reach, which is
+   what this avoids. A notched iPhone has the same problem at both ends.
+
+   The insets come from the environment rather than from a hard-coded height: the
+   status bar is not one size across devices, and these are 0 on the desktop, where
+   the window manager insets the window for us and there is nothing to dodge.
+   `viewport-fit=cover` in `app.html` is what makes them non-zero in a webview.
+
+   Applied to each screen's own root container rather than to `body`, because every
+   one of those containers is sized to `100dvh`: padding inside them moves the
+   content down and keeps it on screen, whereas padding on the body would push them
+   past the bottom edge and add a scrollbar.
+--------------------------------------------------------------------------- */
+:root {
+	--safe-top: env(safe-area-inset-top, 0px);
+	--safe-bottom: env(safe-area-inset-bottom, 0px);
+	--safe-left: env(safe-area-inset-left, 0px);
+	--safe-right: env(safe-area-inset-right, 0px);
+}
+
+.safe-area {
+	padding-top: var(--safe-top);
+	padding-bottom: var(--safe-bottom);
+	padding-left: var(--safe-left);
+	padding-right: var(--safe-right);
+}
+
+/* ---------------------------------------------------------------------------
+   Out-of-reach mask
+
+   Washed over an operator's portrait when they cannot be used — banned in a result, or
+   not in the box. A single fixed grey rather than a per-theme token, and deliberately so:
+   the colour's whole meaning is "you cannot pick this", which has to read identically
+   against all six schemes. A token would have to be re-tuned for each one just to keep
+   saying the same thing, which is the opposite of what a shared meaning wants.
+
+   Translucent, because the portrait underneath is still the information: the point is to
+   mark the operator, not to hide which one it is.
+--------------------------------------------------------------------------- */
+:root {
+	--c-mask: color-mix(in srgb, #6b7280 62%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+   Unusable
+
+   The green that marks an operator the player owns but cannot field. Fixed in every
+   scheme for the same reason the grey above is, and it has to be told apart from both of
+   its neighbours: it is not "out of reach" (they do have it) and not "spent" (they have
+   not used it).
+
+   Opaque here and mixed at the point of use, like the blue below: the box screen fills a
+   name chip with it, and the same green washes over a portrait translucently, so the two
+   uses need different mixes of one colour.
+--------------------------------------------------------------------------- */
+:root {
+	--c-unusable: #15803d;
+}
+
+/* ---------------------------------------------------------------------------
+   Used mask
+
+   The blue that marks an operator the player has already used, on the result screen. Fixed
+   in every scheme, for the same reason the grey above is fixed and more so: "spent" and "out
+   of reach" have to be told apart at a glance, and in a scheme whose accent is red or yellow
+   an accent-coloured mark would read as the other one.
+
+   Opaque here and mixed at the point of use, because the two uses need different mixes of it:
+   over a portrait it is translucent, and behind a chip's label it is opaque against the
+   chip's own surface.
+--------------------------------------------------------------------------- */
+:root {
+	--c-mark: #3b82f6;
+}
