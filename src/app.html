@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8" />
+		<!-- `viewport-fit=cover` is what lets the webview report the system bars'
+		     insets to `env(safe-area-inset-*)`; without it Android 15's edge-to-edge
+		     layout leaves the top of the interface stranded under the status bar. -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<meta name="text-scale" content="scale" />
+		<script>
+			// Runs before the first paint. The colour scheme lives in the state file
+			// that only loads after hydration, so a mirror is kept in localStorage
+			// purely to pick the right theme for this one frame — otherwise a cold
+			// start on a dark scheme flashes white. `persistence.ts` owns the key.
+			(function () {
+				var scheme = null;
+				try {
+					scheme = localStorage.getItem('arg:resolved-theme');
+				} catch (error) {
+					// Storage unavailable; fall through to the preference below.
+				}
+				if (
+					scheme !== 'rhodes' &&
+					scheme !== 'endfield' &&
+					scheme !== 'p5' &&
+					scheme !== 'p3r' &&
+					scheme !== 'jieyuan' &&
+					scheme !== 'sami'
+				) {
+					// The schemes deliberately include no neutral light/dark pair,
+					// so the OS preference chooses between the two defaults rather than
+					// naming a theme of its own.
+					var prefersDark =
+						window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+					scheme = prefersDark ? 'endfield' : 'rhodes';
+				}
+				document.documentElement.dataset.theme = scheme;
+				// Kept in step with `appearance.ts`'s `native` field by hand, because this
+				// runs before any module is loaded. A light scheme left out here gets dark
+				// scrollbars and a dark window frame on a pale page — and a dark one left
+				// out gets pale scrollbars on a dark page.
+				document.documentElement.style.colorScheme =
+					scheme === 'rhodes' || scheme === 'jieyuan' ? 'light' : 'dark';
+			})();
+		</script>
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>

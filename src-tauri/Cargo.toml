@@ -1,0 +1,38 @@
+[package]
+# The product is ARG (Arknights Rogue Generator). The name here decides the release
+# binary — `target/release/arknights-rogue-generator.exe` — so it is spelled out rather
+# than abbreviated; `tauri.conf.json`'s `productName` is what the installers are named
+# after, and that one *is* the abbreviation.
+name = "arknights-rogue-generator"
+version = "1.0.0"
+description = "Arknights Rogue Generator — a deterministic random-opening generator for Integrated Strategies"
+authors = ["Rosmontis220"]
+license = "MIT"
+repository = "https://github.com/Rosmontis220/ArknightsRogueGenerator_Tauri"
+edition = "2021"
+rust-version = "1.77.2"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+# The `_lib` suffix keeps the lib name distinct from the bin name, which Windows
+# requires (see rust-lang/cargo#8519).
+#
+# On Android this name is also the JNI library's: the Android build produces
+# `libarknights_rogue_generator_lib.so` and Tauri points WRY at it. Renaming it here is
+# enough — the Gradle plugin reads the name back out of Cargo rather than being told it.
+name = "arknights_rogue_generator_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.6.3", features = [] }
+
+[dependencies]
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+log = "0.4"
+tauri = { version = "2.11.3", features = [] }
+tauri-plugin-log = "2"
+# Opens the repository link on the About screen in the system browser. The webview has
+# no address bar, so following the link in place would strand the user.
+tauri-plugin-opener = "2"
