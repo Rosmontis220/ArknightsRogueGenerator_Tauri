@@ -1,0 +1,151 @@
+/**
+ * SHA-256 — the hash behind every generated result.
+ *
+ * Implemented here rather than taken from a dependency, and kept dependency-free on
+ * purpose: a hash that decides every generated result should not be able to change
+ * under us via a lockfile bump.
+ *
+ * The contract is exactly three things: UTF-8 input, 64 lowercase hex characters
+ * out, and a digest that never moves, because the seed recorded for every stored run
+ * is this function's output. `sha256.test.ts` pins it with the NIST vectors plus
+ * exact digests over ASCII, multi-byte UTF-8 and lengths on both sides of the
+ * 56/64-byte padding boundaries — the NIST vectors alone would not catch an encoding
+ * mismatch, which is precisely the bug most likely to slip in.
+ *
+ * SHA-256 is big-endian throughout: both the length field and the digest words are
+ * written most-significant byte first (FIPS 180-4 §5.1.1). Getting that backwards
+ * produces a plausible-looking but wrong digest, so it is called out here and
+ * asserted by the vectors.
+ *
+ * The round constants and initial state are the ones FIPS 180-4 prints (§4.2.2 and
+ * §5.3.3). They are pasted rather than derived — the "first 32 bits of the fractional
+ * parts of the cube roots of the first 64 primes" definition needs exact
+ * arbitrary-precision arithmetic to reproduce, and a floating-point `Math.cbrt`
+ * derivation would be a subtly wrong table rather than an auditable one.
+ */
+
+/** Right-rotate a 32-bit word. Inputs may be signed; the result is unsigned. */
+function rotateRight(word: number, shift: number): number {
+	return ((word >>> shift) | (word << (32 - shift))) >>> 0;
+}
+
+/**
+ * Round constants, FIPS 180-4 §4.2.2: the first 32 bits of the fractional parts of
+ * the cube roots of the first 64 primes. Pasted, because deriving them exactly needs
+ * arbitrary-precision arithmetic.
+ */
+const K = new Uint32Array([
+	0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+	0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+	0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+	0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+	0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+	0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+	0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+	0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+]);
+
+const ENCODER = new TextEncoder();
+
+/**
+ * Hashes a string and returns 64 lowercase hex characters.
+ *
+ * The input is encoded as UTF-8 rather than as UTF-16 code units, so a name hashes to
+ * the same digest everywhere: `sha256('罗德岛')` is one fixed value on any platform.
+ */
+export function sha256(input: string): string {
+	const message = ENCODER.encode(input);
+	const bitLength = message.length * 8;
+
+	// Pad with a single 0x80, then zeros, until the length is congruent to 56
+	// modulo 64; the final 8 bytes hold the bit length big-endian.
+	const paddedLength = (((message.length + 8) >> 6) + 1) << 6;
+	const buffer = new Uint8Array(paddedLength);
+	buffer.set(message);
+	buffer[message.length] = 0x80;
+
+	const view = new DataView(buffer.buffer);
+	// Split rather than `bitLength | 0`: a >512 MiB input must not wrap here.
+	view.setUint32(paddedLength - 8, Math.floor(bitLength / 4294967296), false);
+	view.setUint32(paddedLength - 4, bitLength >>> 0, false);
+
+	// Initial state, FIPS 180-4 §5.3.3: the fractional parts of the square roots of
+	// the first eight primes.
+	let h0 = 0x6a09e667;
+	let h1 = 0xbb67ae85;
+	let h2 = 0x3c6ef372;
+	let h3 = 0xa54ff53a;
+	let h4 = 0x510e527f;
+	let h5 = 0x9b05688c;
+	let h6 = 0x1f83d9ab;
+	let h7 = 0x5be0cd19;
+
+	// The message schedule: a block's first 16 words are the block itself, read
+	// big-endian, and the remaining 48 are expanded from them below.
+	const schedule = new Uint32Array(64);
+
+	for (let offset = 0; offset < paddedLength; offset += 64) {
+		for (let i = 0; i < 16; i++) {
+			schedule[i] = view.getUint32(offset + i * 4, false);
+		}
+
+		for (let i = 16; i < 64; i++) {
+			const previous = schedule[i - 15];
+			const recent = schedule[i - 2];
+
+			// σ0 and σ1, FIPS 180-4 §4.1.2. Shifts are logical, not rotations.
+			const s0 = (rotateRight(previous, 7) ^ rotateRight(previous, 18) ^ (previous >>> 3)) >>> 0;
+			const s1 = (rotateRight(recent, 17) ^ rotateRight(recent, 19) ^ (recent >>> 10)) >>> 0;
+
+			schedule[i] = (schedule[i - 16] + s0 + schedule[i - 7] + s1) >>> 0;
+		}
+
+		let a = h0;
+		let b = h1;
+		let c = h2;
+		let d = h3;
+		let e = h4;
+		let f = h5;
+		let g = h6;
+		let h = h7;
+
+		for (let i = 0; i < 64; i++) {
+			// Σ1, Ch and Σ0, Maj, FIPS 180-4 §4.1.2 and §6.2.2.
+			const bigS1 = (rotateRight(e, 6) ^ rotateRight(e, 11) ^ rotateRight(e, 25)) >>> 0;
+			const choose = (e & f) ^ (~e & g);
+			const temp1 = (h + bigS1 + choose + K[i] + schedule[i]) >>> 0;
+
+			const bigS0 = (rotateRight(a, 2) ^ rotateRight(a, 13) ^ rotateRight(a, 22)) >>> 0;
+			const majority = (a & b) ^ (a & c) ^ (b & c);
+			const temp2 = (bigS0 + majority) >>> 0;
+
+			h = g;
+			g = f;
+			f = e;
+			e = (d + temp1) >>> 0;
+			d = c;
+			c = b;
+			b = a;
+			a = (temp1 + temp2) >>> 0;
+		}
+
+		h0 = (h0 + a) >>> 0;
+		h1 = (h1 + b) >>> 0;
+		h2 = (h2 + c) >>> 0;
+		h3 = (h3 + d) >>> 0;
+		h4 = (h4 + e) >>> 0;
+		h5 = (h5 + f) >>> 0;
+		h6 = (h6 + g) >>> 0;
+		h7 = (h7 + h) >>> 0;
+	}
+
+	return [h0, h1, h2, h3, h4, h5, h6, h7].map(toHex).join('');
+}
+
+/**
+ * The digest is big-endian, so each state word is emitted highest byte first. Every
+ * word is already kept unsigned (`>>> 0`), so no masking is needed here.
+ */
+function toHex(word: number): string {
+	return word.toString(16).padStart(8, '0');
+}

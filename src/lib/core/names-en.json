@@ -1,0 +1,725 @@
+{
+	"operators": {
+		"推进之王": {
+			"en": "Siege",
+			"source": "official"
+		},
+		"风笛": {
+			"en": "Bagpipe",
+			"source": "official"
+		},
+		"嵯峨": {
+			"en": "Saga",
+			"source": "official"
+		},
+		"琴柳": {
+			"en": "Saileach",
+			"source": "official"
+		},
+		"焰尾": {
+			"en": "Flametail",
+			"source": "official"
+		},
+		"伺夜": {
+			"en": "Vigil",
+			"source": "official"
+		},
+		"伊内丝": {
+			"en": "Ines",
+			"source": "official"
+		},
+		"缪尔赛思": {
+			"en": "Muelsyse",
+			"source": "official"
+		},
+		"忍冬": {
+			"en": "Vulpisfoglia",
+			"source": "official"
+		},
+		"凛御银灰": {
+			"en": "SilverAsh the Reignfrost",
+			"source": "official"
+		},
+		"可露希尔": {
+			"en": "Closure",
+			"source": "wiki"
+		},
+		"银灰": {
+			"en": "SilverAsh",
+			"source": "official"
+		},
+		"斯卡蒂": {
+			"en": "Skadi",
+			"source": "official"
+		},
+		"陈": {
+			"en": "Ch'en",
+			"source": "official"
+		},
+		"赫拉格": {
+			"en": "Hellagur",
+			"source": "official"
+		},
+		"煌": {
+			"en": "Blaze",
+			"source": "official"
+		},
+		"棘刺": {
+			"en": "Thorns",
+			"source": "official"
+		},
+		"史尔特尔": {
+			"en": "Surtr",
+			"source": "official"
+		},
+		"山": {
+			"en": "Mountain",
+			"source": "official"
+		},
+		"帕拉斯": {
+			"en": "Pallas",
+			"source": "official"
+		},
+		"耀骑士临光": {
+			"en": "Nearl the Radiant Knight",
+			"source": "official"
+		},
+		"艾丽妮": {
+			"en": "Irene",
+			"source": "official"
+		},
+		"百炼嘉维尔": {
+			"en": "Gavial the Invincible",
+			"source": "official"
+		},
+		"玛恩纳": {
+			"en": "Młynar",
+			"source": "official"
+		},
+		"重岳": {
+			"en": "Chongyue",
+			"source": "official"
+		},
+		"仇白": {
+			"en": "Qiubai",
+			"source": "official"
+		},
+		"圣约送葬人": {
+			"en": "Executor the Ex Foedere",
+			"source": "official"
+		},
+		"赫德雷": {
+			"en": "Hoederer",
+			"source": "official"
+		},
+		"止颂": {
+			"en": "Lessing",
+			"source": "official"
+		},
+		"薇薇安娜": {
+			"en": "Viviana",
+			"source": "official"
+		},
+		"锏": {
+			"en": "Degenbrecher",
+			"source": "official"
+		},
+		"左乐": {
+			"en": "Zuo Le",
+			"source": "official"
+		},
+		"乌尔比安": {
+			"en": "Ulpianus",
+			"source": "official"
+		},
+		"佩佩": {
+			"en": "Pepe",
+			"source": "official"
+		},
+		"维娜·维多利亚": {
+			"en": "Vina Victoria",
+			"source": "official"
+		},
+		"隐德来希": {
+			"en": "Entelechia",
+			"source": "official"
+		},
+		"司霆惊蛰": {
+			"en": "Leizi the Thunderbringer",
+			"source": "official"
+		},
+		"丰川祥子": {
+			"en": "Sakiko Togawa",
+			"source": "official"
+		},
+		"赤刃明霄陈": {
+			"en": "Ch'en the Dawnstreak",
+			"source": "official"
+		},
+		"贝洛内": {
+			"en": "Bellone",
+			"source": "official"
+		},
+		"怒潮凛冬": {
+			"en": "Zima the Raging Tide",
+			"source": "wiki"
+		},
+		"星熊": {
+			"en": "Hoshiguma",
+			"source": "official"
+		},
+		"塞雷娅": {
+			"en": "Saria",
+			"source": "official"
+		},
+		"年": {
+			"en": "Nian",
+			"source": "official"
+		},
+		"森蚺": {
+			"en": "Eunectes",
+			"source": "official"
+		},
+		"瑕光": {
+			"en": "Blemishine",
+			"source": "official"
+		},
+		"泥岩": {
+			"en": "Mudrock",
+			"source": "official"
+		},
+		"号角": {
+			"en": "Horn",
+			"source": "official"
+		},
+		"斥罪": {
+			"en": "Penance",
+			"source": "official"
+		},
+		"涤火杰西卡": {
+			"en": "Jessica the Liberated",
+			"source": "official"
+		},
+		"黍": {
+			"en": "Shu",
+			"source": "official"
+		},
+		"余": {
+			"en": "Yu",
+			"source": "official"
+		},
+		"信仰搅拌机": {
+			"en": "Sankta Miksaparato",
+			"source": "official"
+		},
+		"斩业星熊": {
+			"en": "Hoshiguma the Breacher",
+			"source": "official"
+		},
+		"机械师": {
+			"en": "Mechanist",
+			"source": "wiki"
+		},
+		"珊比": {
+			"en": "Thumpy",
+			"source": "wiki"
+		},
+		"能天使": {
+			"en": "Exusiai",
+			"source": "official"
+		},
+		"黑": {
+			"en": "Schwarz",
+			"source": "official"
+		},
+		"W": {
+			"en": "W",
+			"source": "official"
+		},
+		"早露": {
+			"en": "Rosa",
+			"source": "official"
+		},
+		"迷迭香": {
+			"en": "Rosmontis",
+			"source": "official"
+		},
+		"空弦": {
+			"en": "Archetto",
+			"source": "official"
+		},
+		"灰烬": {
+			"en": "Ash",
+			"source": "official"
+		},
+		"假日威龙陈": {
+			"en": "Ch'en the Holungday",
+			"source": "official"
+		},
+		"远牙": {
+			"en": "Fartooth",
+			"source": "official"
+		},
+		"菲亚梅塔": {
+			"en": "Fiammetta",
+			"source": "official"
+		},
+		"鸿雪": {
+			"en": "Pozëmka",
+			"source": "official"
+		},
+		"提丰": {
+			"en": "Typhon",
+			"source": "official"
+		},
+		"莱伊": {
+			"en": "Ray",
+			"source": "official"
+		},
+		"维什戴尔": {
+			"en": "Wiš'adel",
+			"source": "official"
+		},
+		"娜仁图亚": {
+			"en": "Narantuya",
+			"source": "official"
+		},
+		"蕾缪安": {
+			"en": "Lemuen",
+			"source": "official"
+		},
+		"焰狐龙梓兰": {
+			"en": "Violet Mizutsune Orchid",
+			"source": "wiki"
+		},
+		"伊芙利特": {
+			"en": "Ifrit",
+			"source": "official"
+		},
+		"艾雅法拉": {
+			"en": "Eyjafjalla",
+			"source": "official"
+		},
+		"莫斯提马": {
+			"en": "Mostima",
+			"source": "official"
+		},
+		"刻俄柏": {
+			"en": "Ceobe",
+			"source": "official"
+		},
+		"夕": {
+			"en": "Dusk",
+			"source": "official"
+		},
+		"异客": {
+			"en": "Passenger",
+			"source": "official"
+		},
+		"卡涅利安": {
+			"en": "Carnelian",
+			"source": "official"
+		},
+		"澄闪": {
+			"en": "Goldenglow",
+			"source": "official"
+		},
+		"黑键": {
+			"en": "Ebenholz",
+			"source": "official"
+		},
+		"林": {
+			"en": "Lin",
+			"source": "official"
+		},
+		"霍尔海雅": {
+			"en": "Ho'olheyak",
+			"source": "official"
+		},
+		"逻各斯": {
+			"en": "Logos",
+			"source": "official"
+		},
+		"妮芙": {
+			"en": "Nymph",
+			"source": "official"
+		},
+		"玛露西尔": {
+			"en": "Marcille",
+			"source": "official"
+		},
+		"荒芜拉普兰德": {
+			"en": "Lappland the Decadenza",
+			"source": "official"
+		},
+		"烛煌": {
+			"en": "Blaze the Igniting Spark",
+			"source": "official"
+		},
+		"死芒": {
+			"en": "Necrass",
+			"source": "official"
+		},
+		"真言": {
+			"en": "Mantra",
+			"source": "official"
+		},
+		"圣聆初雪": {
+			"en": "Pramanix the Prerita",
+			"source": "official"
+		},
+		"维伊": {
+			"en": "Viy",
+			"source": "wiki"
+		},
+		"谬因": {
+			"en": "Aphrissa",
+			"source": "wiki"
+		},
+		"闪灵": {
+			"en": "Shining",
+			"source": "official"
+		},
+		"夜莺": {
+			"en": "Nightingale",
+			"source": "official"
+		},
+		"凯尔希": {
+			"en": "Kal'tsit",
+			"source": "official"
+		},
+		"流明": {
+			"en": "Lumen",
+			"source": "official"
+		},
+		"焰影苇草": {
+			"en": "Reed the Flame Shadow",
+			"source": "official"
+		},
+		"纯烬艾雅法拉": {
+			"en": "Eyjafjalla the Hvít Aska",
+			"source": "official"
+		},
+		"Mon3tr": {
+			"en": "Mon3tr",
+			"source": "official"
+		},
+		"缇缇": {
+			"en": "Titi",
+			"source": "official"
+		},
+		"凯尔希·思衡托": {
+			"en": "Kal'tsit - Esperanta",
+			"source": "wiki"
+		},
+		"安洁莉娜": {
+			"en": "Angelina",
+			"source": "official"
+		},
+		"麦哲伦": {
+			"en": "Magallan",
+			"source": "official"
+		},
+		"铃兰": {
+			"en": "Suzuran",
+			"source": "official"
+		},
+		"浊心斯卡蒂": {
+			"en": "Skadi the Corrupting Heart",
+			"source": "official"
+		},
+		"灵知": {
+			"en": "Gnosis",
+			"source": "official"
+		},
+		"令": {
+			"en": "Ling",
+			"source": "official"
+		},
+		"白铁": {
+			"en": "Stainless",
+			"source": "official"
+		},
+		"淬羽赫默": {
+			"en": "Silence the Paradigmatic",
+			"source": "official"
+		},
+		"塑心": {
+			"en": "Virtuosa",
+			"source": "official"
+		},
+		"魔王": {
+			"en": "Civilight Eterna",
+			"source": "official"
+		},
+		"酒神": {
+			"en": "Tragodia",
+			"source": "official"
+		},
+		"电弧": {
+			"en": "Raidian",
+			"source": "official"
+		},
+		"遥": {
+			"en": "Haruka",
+			"source": "official"
+		},
+		"溯光星源": {
+			"en": "Astgenne the Lightchaser",
+			"source": "official"
+		},
+		"娜斯提": {
+			"en": "Nasti",
+			"source": "official"
+		},
+		"阿": {
+			"en": "Aak",
+			"source": "official"
+		},
+		"傀影": {
+			"en": "Phantom",
+			"source": "official"
+		},
+		"温蒂": {
+			"en": "Weedy",
+			"source": "official"
+		},
+		"歌蕾蒂娅": {
+			"en": "Gladiia",
+			"source": "official"
+		},
+		"水月": {
+			"en": "Mizuki",
+			"source": "official"
+		},
+		"老鲤": {
+			"en": "Lee",
+			"source": "official"
+		},
+		"归溟幽灵鲨": {
+			"en": "Specter the Unchained",
+			"source": "official"
+		},
+		"多萝西": {
+			"en": "Dorothy",
+			"source": "official"
+		},
+		"缄默德克萨斯": {
+			"en": "Texas the Omertosa",
+			"source": "official"
+		},
+		"麒麟R夜刀": {
+			"en": "Kirin R Yato",
+			"source": "official"
+		},
+		"琳琅诗怀雅": {
+			"en": "Swire the Elegant Wit",
+			"source": "official"
+		},
+		"艾拉": {
+			"en": "Ela",
+			"source": "official"
+		},
+		"阿斯卡纶": {
+			"en": "Ascalon",
+			"source": "official"
+		},
+		"弑君者": {
+			"en": "Crownslayer",
+			"source": "official"
+		},
+		"引星棘刺": {
+			"en": "Thorns the Lodestar",
+			"source": "official"
+		},
+		"新约能天使": {
+			"en": "Exusiai the New Covenant",
+			"source": "official"
+		},
+		"望": {
+			"en": "Wang",
+			"source": "official"
+		},
+		"予愿安洁莉娜": {
+			"en": "Angelina the Mellow Wish",
+			"source": "wiki"
+		},
+		"结城理": {
+			"en": "Makoto Yuki",
+			"source": "wiki"
+		}
+	},
+	"themes": {
+		"傀影与猩红孤钻": {
+			"en": "Phantom & Crimson Solitaire",
+			"source": "official"
+		},
+		"水月与深蓝之树": {
+			"en": "Mizuki & Caerula Arbor",
+			"source": "official"
+		},
+		"探索者的银凇止境": {
+			"en": "Expeditioner's Jǫklumarkar",
+			"source": "official"
+		},
+		"萨卡兹的无终奇语": {
+			"en": "Sarkaz's Furnaceside Fables",
+			"source": "official"
+		},
+		"岁的界园志异": {
+			"en": "Sui's Garden of Grotesqueries",
+			"source": "official"
+		},
+		"沉沦者的黑流树海": {
+			"en": "The Black Flow of the Drowning Seekers",
+			"source": "wiki"
+		}
+	},
+	"squads": {
+		"指挥分队": {
+			"en": "Leader Squad",
+			"source": "official"
+		},
+		"集群分队": {
+			"en": "Gathering Squad",
+			"source": "official"
+		},
+		"后勤分队": {
+			"en": "Support Squad",
+			"source": "official"
+		},
+		"矛头分队": {
+			"en": "Spearhead Squad",
+			"source": "official"
+		},
+		"突击战术分队": {
+			"en": "Tactical Assault Squad",
+			"source": "official"
+		},
+		"堡垒战术分队": {
+			"en": "Tactical Fortification Squad",
+			"source": "official"
+		},
+		"远程战术分队": {
+			"en": "Tactical Ranged Squad",
+			"source": "official"
+		},
+		"破坏战术分队": {
+			"en": "Tactical Destruction Squad",
+			"source": "official"
+		},
+		"研究分队": {
+			"en": "Research Squad",
+			"source": "official"
+		},
+		"高规格分队": {
+			"en": "First-Class Squad",
+			"source": "official"
+		},
+		"心胜于物分队": {
+			"en": "Mind Over Matter Squad",
+			"source": "official"
+		},
+		"物尽其用分队": {
+			"en": "Resourceful Squad",
+			"source": "official"
+		},
+		"以人为本分队": {
+			"en": "People-Oriented Squad",
+			"source": "official"
+		},
+		"特训分队": {
+			"en": "Special Training Squad",
+			"source": "official"
+		},
+		"永恒狩猎分队": {
+			"en": "Eternal Hunting Squad",
+			"source": "official"
+		},
+		"生活至上分队": {
+			"en": "Life Prioritizing Squad",
+			"source": "official"
+		},
+		"科学主义分队": {
+			"en": "Scientific Thinking Squad",
+			"source": "official"
+		},
+		"博闻广记分队": {
+			"en": "Erudite Squad",
+			"source": "official"
+		},
+		"魂灵护送分队": {
+			"en": "Soul Escort Squad",
+			"source": "official"
+		},
+		"蓝图测绘分队": {
+			"en": "Blueprint Squad",
+			"source": "official"
+		},
+		"因地制宜分队": {
+			"en": "Improvisation Squad",
+			"source": "official"
+		},
+		"异想天开分队": {
+			"en": "Mimic Squad",
+			"source": "official"
+		},
+		"点刺成锭分队": {
+			"en": "Ingots Squad",
+			"source": "official"
+		},
+		"拟态学者分队": {
+			"en": "Collection Squad",
+			"source": "official"
+		},
+		"专业人士分队": {
+			"en": "Top Gun Squad",
+			"source": "official"
+		},
+		"特勤分队": {
+			"en": "Special Squad",
+			"source": "official"
+		},
+		"高台突破分队": {
+			"en": "High Ground Breaching Squad",
+			"source": "official"
+		},
+		"地面突破分队": {
+			"en": "Ground Breaching Squad",
+			"source": "official"
+		},
+		"游客分队": {
+			"en": "Tourist Squad",
+			"source": "official"
+		},
+		"司岁台分队": {
+			"en": "Sui Regulator Squad",
+			"source": "official"
+		},
+		"天师府分队": {
+			"en": "Tianshi Bureau Squad",
+			"source": "official"
+		},
+		"本源研修分队": {
+			"en": "Origin Study Squad",
+			"source": "literal"
+		},
+		"文明开化分队": {
+			"en": "Civilization and Enlightenment Squad",
+			"source": "literal"
+		},
+		"开拓者分队": {
+			"en": "Pioneer Squad",
+			"source": "literal"
+		},
+		"多边贸易分队": {
+			"en": "Multilateral Trade Squad",
+			"source": "literal"
+		},
+		"地质调查分队": {
+			"en": "Geological Survey Squad",
+			"source": "literal"
+		}
+	},
+	"pendingSquads": []
+}

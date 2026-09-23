@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ARG</string>
+    <!-- The activity carries its own label, and a launcher shows the *activity's* label
+         when there is one — so setting `app_name` alone still put the old Chinese name
+         under the icon. Both say ARG now. The desktop window title is separate and stays
+         Chinese; it is set in tauri.conf.json, not here. -->
+    <string name="main_activity_title">ARG</string>
+</resources>
